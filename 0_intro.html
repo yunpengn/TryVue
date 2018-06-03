@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Introduction to Vue.js</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	{{ message }}
+</div>
+
+<div id="app2">
+	<span v-bind:title="message">
+		Hover your mouse over here.
+	</span>
+</div>
+
+<div id="app3">
+	<p v-if="seen">You can see this string now.</p>
+</div>
+
+<div id="app4">
+	<ol>
+		<li v-for="item in todos">
+			{{ item.text }}
+		</li>
+	</ol>
+</div>
+
+<div id="app5">
+	<p>{{ message }}</p>
+	<button v-on:click="reverse">Reverse the message</button>
+</div>
+
+<div id="app6">
+	<p>{{ input }}</p>
+	<input type="text" name="something" v-model="input">
+</div>
+
+<div id="app7">
+	<ol>
+		<todo-item
+			v-for="item in items"
+			v-bind:todo="item"
+			v-bind:key="item.id">
+		</todo-item>
+	</ol>
+</div>
+
+<script type="text/javascript">
+var app = new Vue({
+	el: '#app',
+	data: {
+		message: 'Hello, Vue.js!'
+	}
+});
+
+var app2 = new Vue({
+	el: '#app2',
+	data: {
+		message: 'The page is loaded at ' + new Date().toLocaleString() + '.'
+	}
+});
+
+var app3 = new Vue({
+	el: '#app3',
+	data: {
+		seen: true
+	}
+});
+
+var app4 = new Vue({
+	el: '#app4',
+	data: {
+		todos: [
+			{ text: 'HTML' },
+			{ text: 'CSS' },
+			{ text: 'JavaScript' }
+		]
+	}
+});
+
+var app5 = new Vue({
+	el: '#app5',
+	data: {
+		message: 'Hello, Vue.js!'
+	},
+	methods: {
+		reverse: function() {
+			this.message = this.message.split('').reverse().join('')
+		}
+	}
+});
+
+var app6 = new Vue({
+	el: '#app6',
+	data: {
+		input: 'Initial value'
+	}
+});
+
+Vue.component('todo-item', {
+	props: ['todo'],
+	template: '<li>{{ todo.text }}</li>'
+});
+
+var app7 = new Vue({
+	el: '#app7',
+	data: {
+		items: [
+			{ id: 0, text: 'Singapore' },
+			{ id: 1, text: 'China' },
+			{ id: 2, text: 'South Korea' }
+		]
+	}
+});
+</script>
+</body>
+</html>
